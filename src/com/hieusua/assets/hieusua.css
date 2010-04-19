@@ -1,0 +1,4 @@
+/* CSS file */
+VerticalButtonBar {
+	skin: ClassReference("mx.skins.halo.ButtonBarSkin");
+}

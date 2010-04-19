@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="1" height="1"
+	backgroundColor="0xFFFFFF"
+	click="clickHandler();"
+	>
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			private function clickHandler():void {
+				Alert.show( "  This page is built by hieusua.\n  For detail information, please visit www.hieusua.com or send an email to ninhhaihieu@gmail.com.\n  Thank you!", "About hieusua" );
+				
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

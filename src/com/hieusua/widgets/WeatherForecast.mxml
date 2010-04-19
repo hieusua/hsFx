@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="300" height="200"
+	backgroundImage="@Embed(source='com/hieusua/assets/images/wf/wf_bg.png')"
+	backgroundAlpha="1"
+	creationComplete="init();"
+	clipContent="false"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.rpc.http.HTTPService;
+			import com.hieusua.utils.HFilters;
+			
+			private namespace yweather = "http://xml.weather.yahoo.com/ns/rss/1.0";
+			use namespace yweather;
+			
+			[Bindable]
+			public var imgURL:String = "http://l.yimg.com/a/i/us/nws/weather/gr/";
+			
+			private var timer:Timer = new Timer( 300000 );
+			
+			[Bindable]
+			public var city:String = "Ho Chi Minh city";
+			
+			[Bindable]
+			public var temperature:String = "";
+			
+			[Bindable]
+			public var service:YWeatherService = new YWeatherService( );
+			
+			private function init():void {
+				this.filters = [ HFilters.mediumShadow ];
+				requestWeather();
+				timer.addEventListener( TimerEvent.TIMER, timerHandler );
+				timer.start();
+			}
+			
+			private function timerHandler( event:TimerEvent ):void {
+				requestWeather();
+			}
+			
+			private function imgLoadComplete():void {
+				imgCondition.filters = [ HFilters.glowFilter ];
+			}
+			
+			private function doSetting():void {
+				//Tweener.addTween( cvsDisplay, {alpha: 0, time: 0.5, onComplete:function():void { cvsSetting.visible = true; }} );
+				//Tweener.addTween( cvsSetting, {alpha: 1, time: 0., delay:0.5, onComplete:function():void { cvsDisplay.visible = false; }} );
+				goToSettingTween.play();
+			}
+			
+			private function exitSetting():void {
+				cvsSetting.visible = false;
+				cvsDisplay.visible = true;
+				//Tweener.addTween( cvsDisplay, {alpha: 1, time: 0.5, delay: 0.5, onComplete:function():void { cvsSetting.visible = false; }} );
+				
+			}
+			
+			private function requestWeather():void {
+				if ( cbCities.selectedIndex != 0 ) {
+					service.request( cbCities.selectedItem.code );
+				}
+				else {
+					service.request( tiAreaCode.text );
+				}
+			}
+			
+			
+		]]>
+	</mx:Script>
+	<mx:Sequence id="goToSettingTween"
+		>
+		<mx:AnimateProperty
+			target="cvsDisplay" property="alpha"
+			toValue="0"
+			duration="500"
+			tweenEnd="cvsDisplay.visible = false; cvsSetting.visible = true;"
+			/>
+		<mx:AnimateProperty
+			target="cvsSetting" property="alpha"
+			fromValue="0" toValue="1"
+			duration="200"
+			/>
+	</mx:Sequence>
+	<mx:Sequence id="leaveSettingTween"
+		>
+		<mx:AnimateProperty
+			target="cvsDisplay" property="alpha"
+			toValue="1"
+			duration="500"
+			/>
+	</mx:Sequence>
+	<mx:Canvas id="cvsDisplay"
+		width="{this.width}" height="{this.height}"
+		horizontalScrollPolicy="off" verticalScrollPolicy="off"
+		>
+		<mx:Image id="imgCondition"
+			x="20" y="40"
+			alpha="0.8"
+			source="{this.imgURL + service.resultXML.channel.item.yweather::condition.@code + service.dayNight}.png"
+			/>
+		<mx:Label
+			x="15" y="15"
+			width="200"
+			fontFamily="Arial"
+			fontWeight="bold"
+			fontSize="18"
+			color="white"
+			text="{service.resultXML.channel.yweather::location.@city}"
+			/>
+		<mx:Label
+			x="15" y="35"
+			width="250"
+			fontFamily="Arial"
+			fontWeight="bold"
+			fontSize="13"
+			color="white"
+			text="{service.resultXML.channel.item.pubDate}"
+			/>
+		<mx:Label
+			x="15" y="50"
+			fontFamily="Arial"
+			fontWeight="bold"
+			fontSize="60"
+			color="0xFFFFFF"
+			text="{service.resultXML.channel.item.yweather::condition.@temp} &#0176;{service.unit}"
+			/>
+		<mx:Label
+			x="15" y="120"
+			width="200"
+			fontFamily="Arial"
+			fontWeight="bold"
+			fontSize="15"
+			color="white"
+			text="{service.resultXML.channel.item.yweather::condition.@text}"
+			/>
+		<mx:HBox
+			x="15" y="155"
+			width="270"
+			verticalAlign="middle"
+			>
+			<mx:LinkButton id="lbSetting"
+				label="Setting"
+				color="0xFFFFFF" selectionColor="0x5BA8FF" rollOverColor="0xFFFFFF"
+				click="doSetting();"
+				/>
+			<mx:HRule
+				width="100%"
+				/>
+			<mx:Image
+				source="@Embed(source='com/hieusua/assets/images/wf/HSLogo_32_white.png')"
+				/>
+		</mx:HBox>
+	</mx:Canvas>
+	
+	<mx:Canvas id="cvsSetting"
+		width="{this.width}" height="{this.height}"
+		alpha="0"
+		visible="false"
+		>
+		<mx:Label
+			x="15" y="15"
+			fontWeight="bold"
+			color="white"
+			fontFamily="Arial"
+			text="Area code: "
+			/>
+		<mx:TextInput id="tiAreaCode"
+			x="15" y="35"
+			width="200"
+			change="cbCities.selectedIndex = 0;"
+			/>
+		<mx:Label
+			x="15" y="55"
+			fontWeight="bold"
+			color="white"
+			fontFamily="Arial"
+			text="Or select one of these cities:"
+			/>
+		<mx:ComboBox id="cbCities"
+			x="15" y="70"
+			width="200"
+			alpha="1"
+			fillAlphas="[ 1.0, 1.0 ]"
+			fillColors="[ 0xFFFFFF, 0xFFFFFF ]"
+			cornerRadius="0"
+			selectedIndex="1"
+			>
+			<mx:dataProvider>
+				<mx:Object label=" " code="0" />
+				<mx:Object label="Ho Chi Minh city" code="VMXX0007" />
+				<mx:Object label="Houston, TX" code="USTX0617" />
+				<mx:Object label="Seoul, KR" code="KSXX0037" />
+			</mx:dataProvider>
+			
+			
+		</mx:ComboBox>
+		<mx:Button id="btnOK"
+			x="15" y="150"
+			label="OK"
+			fillAlphas="[ 1.0, 1.0 ]"
+			fillColors="[ 0xFFFFFF, 0xFFFFFF ]"
+			click="requestWeather();exitSetting();"
+			/>
+	</mx:Canvas>
+	
+</mx:Canvas>

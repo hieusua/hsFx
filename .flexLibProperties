@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties version="1">
+<includeClasses>
+<classEntry path="com.hieusua.error.HSError"/>
+<classEntry path="com.hieusua.utils.RSSReader"/>
+<classEntry path="com.hieusua.containers.VerticalTabNavigator"/>
+<classEntry path="com.adobe.utils.DateUtil"/>
+<classEntry path="com.hieusua.utils.MixFactory"/>
+<classEntry path="com.hieusua.controls.MultilineLabel"/>
+<classEntry path="com.hieusua.controls.DisabledKeyDataGrid"/>
+<classEntry path="com.hieusua.utils.HTimer"/>
+<classEntry path="com.hieusua.controls.VerticalTab"/>
+<classEntry path="com.hieusua.preloaders.Preloader05"/>
+<classEntry path="com.hieusua.utils.XMLFileReader"/>
+<classEntry path="com.hieusua.controls.VerticalTabBar"/>
+<classEntry path="com.hieusua.controls.ExpandCollapseButton"/>
+<classEntry path="com.hieusua.vo.RSSItem"/>
+<classEntry path="com.hieusua.utils.PolylineEncoder"/>
+<classEntry path="com.hieusua.preloaders.Preloader04"/>
+<classEntry path="com.hieusua.containers.ClosableTabNavigator"/>
+<classEntry path="com.hieusua.widgets.YWeatherService"/>
+<classEntry path="com.hieusua.externals.PromptingTextInput"/>
+<classEntry path="com.hieusua.externals.AutoComplete"/>
+<classEntry path="com.hieusua.externals.TokenUtil"/>
+<classEntry path="com.hieusua.skins.VerticalButtonBarButtonSkin"/>
+<classEntry path="com.hieusua.media.MP3Player"/>
+<classEntry path="com.hieusua.utils.BrowserManagementWrapper"/>
+<classEntry path="com.hieusua.widgets.WeatherForecast"/>
+<classEntry path="com.hieusua.media.MP3PlayerEvent"/>
+<classEntry path="com.hieusua.algorithms.geoastar.GeoGraph"/>
+<classEntry path="com.hieusua.displays.SmoothImage"/>
+<classEntry path="com.hieusua.algorithms.geoastar.GeoAStar"/>
+<classEntry path="com.hieusua.utils.EnhancedByteArray"/>
+<classEntry path="com.hieusua.skins.LeftSideButtonSkin"/>
+<classEntry path="com.hieusua.utils.InstanceFactory"/>
+<classEntry path="com.hieusua.core.HTextField"/>
+<classEntry path="com.hieusua.utils.HFilters"/>
+<classEntry path="com.hieusua.controls.ClosableTab"/>
+<classEntry path="com.hieusua.controls.ClosableTabBar"/>
+<classEntry path="com.hieusua.controls.AboutHieusua"/>
+<classEntry path="com.hieusua.core.HArray"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests>
+<namespaceManifestEntry manifest="manifest.xml" namespace="http://hieusua.com/2009"/>
+</namespaceManifests>
+</flexLibProperties>

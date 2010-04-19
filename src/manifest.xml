@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<componentPackage>
+	<component id="AboutHieusua" class="com.hieusua.controls.AboutHieusua"/>
+    <component id="PromptingTextInput" class="com.hieusua.externals.PromptingTextInput"/>
+    <component id="AutoComplete" class="com.hieusua.externals.AutoComplete"/>
+    <component id="SmoothImage" class="com.hieusua.displays.SmoothImage"/>
+</componentPackage>

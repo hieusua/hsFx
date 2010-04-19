@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:dp="com.hieusua.displays.*"
+	alpha="0.75"
+	rollOut="rollOutHandler();" rollOver="rollOverHandler();"
+	click="clickHandler();"
+	creationComplete="init();"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			public var state:int = 0;
+			
+			private function init():void {
+				image.x = -image.width >> 1;
+				image.y = -image.height >> 1;
+				cvsNest.x = image.width >> 1;
+				cvsNest.y = image.height >> 1;
+			}
+			
+			private function rollOutHandler():void {
+				alpha = 0.75;
+			}
+			
+			private function rollOverHandler():void {
+				alpha = 1;
+			}
+			
+			private function clickHandler():void {
+				state = 1 - state;
+				rotateButton.play();
+				//Tweener.addTween( cvsNest, { rotation: state * 90, time: 0.2 } );
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:AnimateProperty id="rotateButton"
+		target="cvsNest" property="rotation"
+		duration="200"
+		toValue="{state * 90}"
+		/>
+	
+	<mx:Canvas id="cvsNest"
+		clipContent="false"
+		>
+		<dp:SmoothImage id="image"
+			source="@Embed(source='../assets/images/expand_collapse.png')"
+			/>
+	</mx:Canvas>
+</mx:Canvas>
